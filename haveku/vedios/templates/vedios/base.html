@@ -66,17 +66,10 @@
     </div>
     
     <div class="panel-body">
-      {% for catalogue in catalogues %}
-      
-      <a href="/catalog-{{ catalogue.id }}" class="label label-default">{{ catalogue.name }}</a>
-      
       {% for tag in tags %}
-      {% if tag.catalogue == catalogue %}
+      {% if not tag.catalogue %}
         <a href="/tag-{{ tag.id }}/" class="label {% if activetag.id == tag.id %} label-primary {% else %} label-info {% endif %} label-tag">{{ tag.name }}</a>
       {% endif %}
-      {% endfor %}
-      
-      <p class="tags"></p>
       {% endfor %}
     </div>
   </div>
