@@ -1,0 +1,64 @@
+# -*- coding: utf-8 -*-
+
+
+def get_vid_of_url(url):
+    pass
+
+
+def parse_url(url):
+    pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
