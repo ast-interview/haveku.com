@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import urllib2, re, json, hashlib, time
+import json, hashlib, time
+
+from urllib import request
 
 
 def preview_youku(vid):
@@ -13,11 +15,13 @@ def preview_youku(vid):
     urllib2.install_opener(opener)
     '''
     
-    readstring = urllib2.urlopen(url).read()
+    readstring = request.urlopen(url).read()
     
-    dic = json.loads(readstring)
-    if dic.has_key('data'):
-        if dic['data'][0].has_key('logo'):
+    
+    dic = json.loads(readstring.decode('utf-8'))
+    
+    if 'data' in dic.keys():
+        if 'logo' in dic['data'][0].keys():
             return dic['data'][0]['logo']
     
     return ""
@@ -37,12 +41,13 @@ def preview_youku(vid):
 def preview_tudou(vid):
     url = r'http://api.tudou.com/v6/video/info?app_key=225d19f553bde37e&format=json&itemCodes=%s' % vid
     
-    readstring = urllib2.urlopen(url).read()
+    readstring = request.urlopen(url).read()
     
-    dic = json.loads(readstring)
-    if dic.has_key('results'):
-        if dic['results'][0].has_key('bigPicUrl'):
-            return dic['results'][0]['bigPicUrl']
+    rst = json.loads(readstring.decode('utf-8'))
+    
+    if 'results' in rst.keys():
+        if 'bigPicUrl' in rst['results'][0].keys():
+            return rst['results'][0]['bigPicUrl']
     
     return ""
 
@@ -51,17 +56,20 @@ def previe_56(vid):
     '''
     http://dev.56.com/wiki/index.php?doc-view-20
     '''
-    ts = unicode(int(time.time()))
+    ts = str(int(time.time()))
     
     appkey = "3000004324"
     appsecret = "3b361ba0d77e7311"
     
     m = hashlib.md5()
-    m.update("vid=%s" % vid)
+    #m.update("vid=%s" % vid)
+    a = "vid=%s" % vid
+    m.update(a.encode(encoding='utf_8', errors='strict'))
     sign1 = m.hexdigest()
     
     m = hashlib.md5()
-    m.update("%s#%s#%s#%s" %(sign1, appkey, appsecret, ts))
+    a = "%s#%s#%s#%s" %(sign1, appkey, appsecret, ts)
+    m.update(a.encode(encoding='utf_8', errors='strict'))
     sign = m.hexdigest()
     
     '''
@@ -71,11 +79,12 @@ def previe_56(vid):
     '''
     
     url = r'http://oapi.56.com/video/getVideoInfo.json?appkey=%s&sign=%s&ts=%s&vid=%s' % (appkey, sign, ts, vid)
-    readstring = urllib2.urlopen(url).read()
+    readstring = request.urlopen(url).read()
     
-    dic = json.loads(readstring)
-    if dic.has_key('0'):
-        if dic['0'].has_key('mimg'):
+    dic = json.loads(readstring.decode('utf-8'))
+    
+    if '0' in dic.keys():
+        if 'mimg' in dic['0'].keys():
             return dic['0']['mimg']
     
     return ""
@@ -86,9 +95,9 @@ def previe_56(vid):
 
 
 if __name__ == "__main__":
-    #print preview_youku('XMzM5NTU2MDcy')
-    print preview_tudou('f6I9_UWl5Yo')
-    #print previe_56('MTExODU1NTI5')
+#     print(preview_youku('XMzM5NTU2MDcy'))
+#     print(preview_tudou('f6I9_UWl5Yo'))
+    print(previe_56('MTExODU1NTI5'))
 
 
 
