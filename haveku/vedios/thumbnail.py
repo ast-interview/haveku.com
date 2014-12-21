@@ -10,7 +10,7 @@ def preview_youku(vid):
     url = r'http://v.youku.com/player/getPlayList/VideoIDS/%s' % vid
     
     '''
-    proxy = urllib2.ProxyHandler({'http': r'http://SCHENKER-ASIA\hewang:Iawywfnh2@sscproxy.ap.signintra.com:80'})
+    proxy = urllib2.ProxyHandler({'http': r'http://SCHENKER-ASIA\name:pwd@sscproxy.ap.signintra.com:80'})
     opener = urllib2.build_opener(proxy)
     urllib2.install_opener(opener)
     '''
@@ -73,7 +73,7 @@ def previe_56(vid):
     sign = m.hexdigest()
     
     '''
-    proxy = urllib2.ProxyHandler({'http': r'http://SCHENKER-ASIA\hewang:Iawywfnh2@sscproxy.ap.signintra.com:80'})
+    proxy = urllib2.ProxyHandler({'http': r'http://SCHENKER-ASIA\name:pwd@sscproxy.ap.signintra.com:80'})
     opener = urllib2.build_opener(proxy)
     urllib2.install_opener(opener)
     '''
