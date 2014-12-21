@@ -1,0 +1,87 @@
+{% extends "vedios/base.html" %}
+{% load staticfiles %}
+{% load djangomarkdown %}
+
+{% block title %}有库网 - 精选优质视频 | {{ vedio.title }}{% endblock %}
+
+{% block show_vedio %}
+  <div class="panel panel-info">
+    <div class="panel-heading"><h3 class="panel-title">{{ vedio.title }}</h3></div>
+    
+    <div class="panel-body">
+      <div class="row">
+      
+      <div class="col-md-8">
+      
+      {% if vedio.provenance.domain == "youku.com" %}
+      
+      <iframe height=530 width=740 src="http://player.youku.com/embed/{{ vedio.vid }}" frameborder=0 allowfullscreen></iframe>
+      
+      {% endif %}
+      
+      {% if vedio.provenance.domain == "tudou.com" %}
+      <embed
+		src="http://www.tudou.com/v/{{ vedio.vid }}&autoPlay=false&sp={{ vedio.image }}&withRecommendList=true&startSeekPoint=0.5/v.swf"
+		type="application/x-shockwave-flash"
+		allowscriptaccess="always"
+		allowfullscreen="true"
+		wmode="opaque"
+		width="740"
+		height="530">
+	</embed>
+	
+      {% endif %}
+      
+      
+      {% if vedio.provenance.domain == "56.com" %}
+      <embed src="http://player.56.com/3000004324/open_{{ vedio.vid }}.swf" type="application/x-shockwave-flash" width="740" height="530" allowfullscreen="true" allownetworking="all" allowscriptaccess="always"></embed>
+      
+      {% endif %}
+      
+      
+      <br />
+      <br />
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_like_tsina" data="width=120"></a>
+    <a class="jiathis_like_qzone"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1372647944352476" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+      </div>
+      <div class="col-md-4">
+
+
+
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=1393934181482934" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+      <br />
+      <hr />
+      {{ vedio.description|djangomarkdown|safe }}
+      <br />
+      <br />
+      
+      
+      </div>
+      
+      
+      </div>
+    </div>
+    
+  </div>
+
+{% endblock %}
+

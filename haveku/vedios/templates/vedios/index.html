@@ -1,0 +1,44 @@
+{% extends "vedios/base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}有库网 - 精选优质视频{% if active_catalogue %} | {{ active_catalogue.text }}{% endif %}{% if search_data %} | 搜索：[&nbsp;{{ search_data }}&nbsp;]{% endif %}{% if activetag %} | {{ activetag.text }}{% endif %}{% endblock %}
+
+{% block index_list %}
+  <div class="panel panel-info">
+    <div class="panel-heading"><h3 class="panel-title">{% if active_catalogue %}{{ active_catalogue.text }}{% else %}全部{% endif %}{% if search_data %}&nbsp;&nbsp;&nbsp;搜索：[&nbsp;{{ search_data }}&nbsp;]{% endif %}</h3></div>
+    
+    <div class="panel-body">
+      {% for vedio in vedios %}
+        {% if forloop.first %}<div class="row">{% endif %}
+      
+        <div class="col-md-3"><div class="thumbnail">
+          {% if vedio.image == "" %}
+            <a href="/vedio-{{ vedio.id }}/" target="_blank"><img src="{% static 'vedios/image/vedio_default.png' %}" /></a>
+          {% else %}
+            <a href="/vedio-{{ vedio.id }}/" target="_blank"><img src="{{ vedio.image }}" /></a>
+          {% endif %}
+          <div class="caption">
+            <a href="/tag-{{ vedio.tag.id }}/" class="label {% if activetag.id == vedio.tag.id %} label-primary {% else %} label-info {% endif %} label-slidetag"><span>&bull;</span>{{ vedio.tag.text }}</a>
+            <h4><a href="/vedio-{{ vedio.id }}/" target="_blank">{{ vedio.title|truncatechars:100 }}</a></h4>
+          </div>
+        </div></div>
+      
+        {% if forloop.counter|divisibleby:"4" %}</div><div class="row">{% endif %}
+        {% if forloop.last %}</div>{% endif %}
+      {% endfor %}
+    </div>
+    
+  </div>
+
+  <ul class="pagination">
+    <li><a href="?page=1">首页</a></li>
+    {% if vedios.has_previous %}<li><a href="?page={{ vedios.previous_page_number }}">上一页</a></li>{% endif %}
+    {% for p in vedios.paginator.page_range %}
+    <li><a href="?page={{ p }}" {% if p == vedios.number %} style="background-color: #EEEEEE;" {% endif %}>{{ p }}</a></li>
+    {% endfor %}
+    {% if vedios.has_next %}<li><a href="?page={{ vedios.next_page_number }}">下一页</a></li>{% endif %}
+    <li><a href="?page={{ vedios.paginator.num_pages }}">尾页</a></li>
+  </ul>
+{% endblock %}
+

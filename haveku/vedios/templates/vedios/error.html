@@ -1,0 +1,34 @@
+{% extends "vedios/base.html" %}
+{% load staticfiles %}
+{% load djangomarkdown %}
+
+{% block title %}有库网 - 精选优质视频 | 错误{% endblock %}
+
+
+    {% block search %}
+    {% endblock %}
+
+{% block tags %}{% endblock %}
+
+{% block show_vedio %}
+<div class="panel panel-info">
+  <div class="panel-heading">
+  <h3 class="panel-title">哎呀！{% if err404 %}&nbsp;404 Not Found。抱歉，但您好像走错地方了。{% endif %}{% if err500 %}&nbsp;Error 500。{% endif %}</h3>
+  </div>
+  
+  <div class="panel-body" style="height: 600px;">
+    {% if f %}
+        <p>{{ f.errors }}</p>
+    {% endif %}
+    {% if errmsg %}
+        <ul class="errorlist"><li>Error Message<ul class="errorlist"><li>{{ errmsg }}</li></ul>
+    {% endif %}
+    {% if err404 %}
+        <img src="{% static 'vedios/image/404.gif' %}"  alt=""></img>
+    {% endif %}
+    {% if err500 %}
+        <img src="{% static 'vedios/image/404.gif' %}"  alt=""></img>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
