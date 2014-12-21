@@ -5,7 +5,7 @@ import markdown2
 
 from django import template
 from django.template.defaultfilters import stringfilter
-from django.utils.encoding import force_unicode
+#from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 
 register = template.Library()
@@ -18,7 +18,7 @@ def djangomarkdown(value):
     '''
     
 
-    return mark_safe(markdown2.markdown(force_unicode(value),
+    return mark_safe(markdown2.markdown(value,
                                         extras=["code-friendly"]
                                         )
                      )
@@ -30,6 +30,8 @@ if __name__ == "__main__":
 
 + aa
 
+**aaa**
+
 <p>aaa</p>
 
 <h1>aa</h1>
@@ -38,7 +40,7 @@ if __name__ == "__main__":
     
     #html = markdown2.markdown(mystring, extras=["xml"])
     html = markdown2.markdown(mystring, extras=["code-friendly"])
-    print html
+    print(html)
 
 
 

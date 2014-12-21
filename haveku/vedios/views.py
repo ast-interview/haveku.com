@@ -2,9 +2,8 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 
-# Create your views here.
 
-from models import Catalogue, Tag, Vedio
+from .models import Catalogue, Tag, Vedio
 
 
 def index(request, tag_id="", catalog_id="", search=""):
@@ -58,12 +57,12 @@ def index(request, tag_id="", catalog_id="", search=""):
         vedios_this_page = p.page(p.num_pages)
     
     
-    context  = {'catalogues': catalogues,
-                'tags': tags,
-                'vedios': vedios_this_page,
-                'activetag': active_tag,
+    context  = {'catalogues'      : catalogues,
+                'tags'            : tags,
+                'vedios'          : vedios_this_page,
+                'activetag'       : active_tag,
                 'active_catalogue': active_catalogue,
-                'search_data': search_data,
+                'search_data'     : search_data,
                 }
     
     return render(request, 'vedios/index.html', context)
@@ -82,9 +81,9 @@ def show(request, vedio_id=""):
         raise Http404
     
     context  = {'catalogues': catalogues,
-                'tags': tags,
-                'vedio': vedio,
-                'activetag': active_tag,
+                'tags'      : tags,
+                'vedio'     : vedio,
+                'activetag' : active_tag,
                 }
     
     
@@ -113,8 +112,8 @@ def err404(request):
     
     
     context  = {'catalogues': catalogues,
-                'tags': tags,
-                'err404': True,
+                'tags'      : tags,
+                'err404'    : True,
                 }
     
     return render(request, 'vedios/error.html', context)
@@ -127,8 +126,8 @@ def err500(request):
     
     
     context  = {'catalogues': catalogues,
-                'tags': tags,
-                'err500': True,
+                'tags'      : tags,
+                'err500'    : True,
                 }
     
     

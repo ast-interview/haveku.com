@@ -33,8 +33,13 @@ class Vedio(models.Model):
     title         = models.CharField(null=True, blank=True, max_length=200)
     description   = models.TextField(null=True, blank=True)
     
+    vid           = models.CharField(null=True, blank=True, max_length=300)
+    thumbnail     = models.URLField(null=True, blank=True) #, editable=False
+    
     datetime      = models.DateTimeField()
     
+    def __str__(self):
+        return self.title
 
 
 

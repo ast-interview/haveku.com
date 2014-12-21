@@ -13,13 +13,13 @@
       
       <div class="col-md-8">
       
-      {% if vedio.provenance.domain == "youku.com" %}
+      {% if "youku.com" in vedio.url %}
       
       <iframe height=530 width=740 src="http://player.youku.com/embed/{{ vedio.vid }}" frameborder=0 allowfullscreen></iframe>
       
       {% endif %}
       
-      {% if vedio.provenance.domain == "tudou.com" %}
+      {% if "tudou.com" in vedio.url %}
       <embed
 		src="http://www.tudou.com/v/{{ vedio.vid }}&autoPlay=false&sp={{ vedio.image }}&withRecommendList=true&startSeekPoint=0.5/v.swf"
 		type="application/x-shockwave-flash"
@@ -33,7 +33,7 @@
       {% endif %}
       
       
-      {% if vedio.provenance.domain == "56.com" %}
+      {% if "56.com" in vedio.url %}
       <embed src="http://player.56.com/3000004324/open_{{ vedio.vid }}.swf" type="application/x-shockwave-flash" width="740" height="530" allowfullscreen="true" allownetworking="all" allowscriptaccess="always"></embed>
       
       {% endif %}
