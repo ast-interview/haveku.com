@@ -32,19 +32,22 @@ class VedioAdmin(admin.ModelAdmin):
     }
     
     def save_model(self, request, obj, form, change):
-        '''
-        if obj.provenance.domain == "youku.com":
-            obj.image = thumbnail.preview_youku(obj.vid)
-        elif obj.provenance.domain == "56.com":
-            obj.image = thumbnail.previe_56(obj.vid)
-        elif obj.provenance.domain == "tudou.com":
-            obj.image = thumbnail.preview_tudou(obj.vid)
-        else:
-            obj.image = ""
-        '''
-        obj.image = ""
+        if obj.thumbnail=="" or obj.title=="" or obj.vid=="":
+            
+            result = parsevedio.get_data_from_web_interface(obj.url)
+            try:
+                if obj.vid=="":
+                    obj.vid = parsevedio.get_vid_of_url(obj.url)
+                if obj.title == "":
+                    obj.title = result[0]
+                if obj.description == "":
+                    obj.description = result[1]
+                if obj.thumbnail == "":
+                    obj.thumbnail = result[2]
+            except:
+                pass
+        
         obj.save()
-
 
 
 
