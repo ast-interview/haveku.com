@@ -36,7 +36,7 @@ class Vedio(models.Model):
     vid           = models.CharField(null=True, blank=True, max_length=300)
     thumbnail     = models.URLField(null=True, blank=True) #, editable=False
     
-    datetime      = models.DateTimeField()
+    datetime      = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
     def __str__(self):
         return self.title
