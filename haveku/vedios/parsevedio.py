@@ -48,8 +48,6 @@ def parse_json_from_web_interface(url, vid):
     
     readstring = request.urlopen(parse_url).read()
     
-    print(readstring)
-    
     return json.loads(readstring.decode('utf-8'))
 
 
@@ -57,7 +55,6 @@ def get_data_from_web_interface(url):
     
     json_dict = parse_json_from_web_interface(url, get_vid_of_url(url))
     
-    print(json_dict)
     try:
         if "youku.com" in url.lower():
             return [
@@ -81,7 +78,6 @@ def get_data_from_web_interface(url):
                     ]
     
     except:
-        print("error")
         return ""
     
     return ""
